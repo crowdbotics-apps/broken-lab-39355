@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@modules/login": "file:./modules/login/",
+    "@modules/user-profile": "file:./modules/user-profile/",
     "@react-native-async-storage/async-storage": "1.17.9",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.9.3",
