@@ -34,5 +34,5 @@ pipenv = "*"
 django-import-export = "*"
 drf-spectacular = "~=0.25.1"
 cb-terms-and-conditions = {editable = true, path = "./modules/terms_and_conditions"}
-cb-payments = {editable = true, path = "./modules/payments"}
 cb-privacy-policy = {editable = true, path = "./modules/privacy_policy"}
+cb-payments = {editable = true, path = "./modules/payments"}
