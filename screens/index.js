@@ -1,231 +1,138 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
-  View,
   StyleSheet,
+  View,
   TextInput,
+  FlatList,
   Image,
-  Pressable,
-  ScrollView
+  Pressable
 } from "react-native";
 
-const Signup2 = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isCheck, setIsCheck] = useState(false);
-  const [secureTextEntryPassword, setSecureTextEntryPassword] = useState(true);
-  const [secureTextEntryConfirmPassword, setSecureTextEntryConfirmPassword] =
-    useState(true);
+const ChatListingScreen = params => {
+  const [username, setUsername] = useState("");
+  const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    setMessages([
+      {
+        id: 1,
+        name: "Cody Fisher",
+        message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        profileImage: require("./assets/profile.png"),
+        unread: 1,
+        isOnline: true,
+        lastTime: "15 min"
+      },
+      {
+        id: 2,
+        name: "Jenny Wilson",
+        message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        profileImage: require("./assets/profile.png"),
+        unread: 2,
+        isOnline: true,
+        lastTime: "1 hour"
+      },
+      {
+        id: 3,
+        name: "Johnny Watson",
+        message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        profileImage: require("./assets/profile.png"),
+        unread: 0,
+        isOnline: true,
+        lastTime: "2 hours"
+      },
+      {
+        id: 4,
+        name: "Ralph Williams",
+        message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        profileImage: require("./assets/profile.png"),
+        unread: 0,
+        isOnline: false,
+        lastTime: "3 hours"
+      },
+      {
+        id: 5,
+        name: "Guy Hawkins",
+        message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        profileImage: require("./assets/profile.png"),
+        unread: 0,
+        isOnline: false,
+        lastTime: "Mon"
+      },
+      {
+        id: 6,
+        name: "Morris Henery",
+        message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        profileImage: require("./assets/profile.png"),
+        unread: 0,
+        isOnline: false,
+        lastTime: "Tue"
+      },
+      {
+        id: 7,
+        name: "Irma Flores",
+        message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        profileImage: require("./assets/profile.png"),
+        unread: 0,
+        isOnline: false,
+        lastTime: "Wed"
+      }
+    ]);
+  }, []);
   return (
     <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Text style={styles.heading}>Welcome</Text>
-        <Text style={styles.subHeading}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non at sed.
-        </Text>
-        <Input
-          text="Email address"
-          placeholder="Enter your email address"
-          value={email}
-          onChange={setEmail}
-          containerStyle={styles.inputContainer}
-        />
-        <Input
-          text="Password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={setPassword}
-          containerStyle={styles.inputContainer}
-          secureTextEntry={secureTextEntryPassword}
-          icon={require("./assets/eyeIcon.png")}
-          iconOnPress={() =>
-            setSecureTextEntryPassword(!secureTextEntryPassword)
-          }
-        />
-        <Input
-          text="Confirm password"
-          placeholder="Enter your password again"
-          value={confirmPassword}
-          onChange={setConfirmPassword}
-          containerStyle={styles.inputContainer}
-          secureTextEntry={secureTextEntryConfirmPassword}
-          icon={require("./assets/eyeIcon.png")}
-          iconOnPress={() =>
-            setSecureTextEntryConfirmPassword(!secureTextEntryConfirmPassword)
-          }
-        />
-        <View style={styles.flexRow}>
-          <Checkbox
-            value={isCheck}
-            setValue={setIsCheck}
-            style={styles.checkbox}
+      <View style={styles.header}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputText}>Search</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={text => setUsername(text)}
+            value={username}
+            placeholder="Search Username"
+            placeholderTextColor="#9B9B9B"
+            autoCapitalize="none"
+            autoCorrect={false}
           />
-          <Text style={styles.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non at sed.
-          </Text>
+          <Image
+            source={require("./assets/searchIcon.png")}
+            style={styles.searchIcon}
+          />
         </View>
-        <View style={styles.flexRow}>
-          <Button buttonText="Sign Up" style={styles.button} />
-          <Pressable style={styles.fingerprintButton}>
-            <Image
-              source={require("./assets/fingerprintIcon.png")}
-              style={styles.fingerprintIcon}
-            />
-          </Pressable>
-        </View>
-        <Text style={styles.separatorText}>Or Sign Up with</Text>
-        <SocialButton text="Apple" icon={require("./assets/appleIcon.png")} />
-        <SocialButton text="Google" icon={require("./assets/googleIcon.png")} />
-        <SocialButton
-          text="Facebook"
-          icon={require("./assets/facebookIcon.png")}
-        />
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>I have an account. </Text>
-          <Pressable>
-            <Text style={[styles.footerText, styles.bold]}>Login</Text>
-          </Pressable>
-        </View>
-      </ScrollView>
+      </View>
+      <TabView tabTitles={["Select all", "Delete selected"]} selected={0} />
+      <FlatList
+        data={messages}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => <ChatListingItem message={item} />}
+      />
+      <View style={styles.newBtn}>
+        <Pressable>
+          <Image source={require("./assets/plusIcon.png")} />
+        </Pressable>
+      </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 20
+    justifyContent: "flex-start"
   },
-  heading: {
-    fontSize: 26,
-    fontWeight: "bold",
-    textAlign: "center",
-    alignSelf: "center",
-    color: "#222222",
-    marginVertical: 10
+  header: {
+    padding: 20,
+    // flex: 1,
+    height: 100
   },
-  subHeading: {
-    fontSize: 14,
-    color: "#888888",
-    textAlign: "center",
-    alignSelf: "center",
-    width: "80%",
-    lineHeight: 20,
-    marginBottom: 20
-  },
-  flexRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 10
-  },
-  checkbox: {
-    marginLeft: 10
-  },
-  description: {
-    fontSize: 14,
-    color: "#888888",
-    lineHeight: 20,
-    marginLeft: 10,
-    flex: 1,
-    flexWrap: "wrap"
-  },
-  button: {
-    flex: 1,
-    marginRight: 10
-  },
-  fingerprintButton: {
-    width: 50,
-    height: 50,
-    padding: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F2F2F2",
-    borderRadius: 10
-  },
-  fingerprintIcon: {
-    width: 20,
-    height: 20,
-    resizeMode: "contain"
-  },
-  separatorText: {
-    fontSize: 12,
-    color: "#888888",
-    textAlign: "center",
-    alignSelf: "center",
-    marginBottom: 20
-  },
-  footer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 20
-  },
-  footerText: {
-    fontSize: 16,
-    color: "#888888"
-  },
-  bold: {
-    fontWeight: "bold"
-  }
-});
-
-export default Signup2;
-
-const Input = props => {
-  return (
-    <View style={[inputStyles.inputContainer, props.containerStyle]}>
-      {props.text
-        ? (
-        <Text style={inputStyles.inputText}>{props.text}</Text>
-          )
-        : null}
-
-      <TextInput
-        style={[
-          inputStyles.input,
-          props.style,
-          props.textArea ? inputStyles.textArea : null
-        ]}
-        placeholder={props.placeholder ? props.placeholder : "Enter"}
-        value={props.value}
-        onChangeText={() => props.onChange()}
-        placeholderTextColor={
-          props.placeholderTextColor ? props.placeholderTextColor : "#9B9B9B"
-        }
-        editable={props.editable !== false}
-        autoCapitalize="none"
-        autoCorrect={false}
-        multiline={!!props.textArea}
-        backgroundColor={props.backgroundColor}
-        secureTextEntry={props.secureTextEntry}
-      />
-      {props.errorText
-        ? (
-        <Text style={inputStyles.error}>{props.errorText}</Text>
-          )
-        : null}
-      {props.icon
-        ? (
-        <Pressable
-          onPress={() => props.iconOnPress()}
-          style={inputStyles.iconWithText}>
-          <Image source={props.icon} style={inputStyles.icon} />
-        </Pressable>
-          )
-        : null}
-      <View style={styles.children}>{props.children}</View>
-    </View>
-  );
-};
-
-const inputStyles = StyleSheet.create({
   inputContainer: {
     flexDirection: "column",
-    justifyContent: "center"
+    flex: 1,
+    justifyContent: "center",
+    marginHorizontal: 5
   },
   inputText: {
-    fontSize: 14,
+    fontSize: 16,
     marginLeft: 20,
     color: "#111112"
   },
@@ -237,164 +144,163 @@ const inputStyles = StyleSheet.create({
     paddingLeft: 20,
     marginVertical: 10,
     width: "100%",
-    height: 50,
-    color: "#000"
+    height: 50
   },
-  iconWithText: {
+  searchIcon: {
     position: "absolute",
     right: 30,
-    bottom: 25,
-    width: 20,
-    height: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1
+    top: 35
   },
-  icon: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "contain"
-  },
-  textArea: {
-    height: 150
-  },
-  children: {}
-});
-
-const Checkbox = props => {
-  return (
-    <Pressable
-      onPress={() => {
-        props.setValue(!props.value);
-      }}
-      style={[checkboxStyles.container, props.style]}>
-      <Image
-        source={
-          props.value
-            ? require("./assets/checkboxIconActive.png")
-            : require("./assets/checkboxIcon.png")
-        }
-        style={[
-          checkboxStyles.checkbox,
-          props.color && { tintColor: props.color },
-          props.activeColor && props.value && { tintColor: props.activeColor }
-        ]}
-      />
-    </Pressable>
-  );
-};
-
-const checkboxStyles = StyleSheet.create({
-  container: {
-    height: 20,
-    width: 20
-  },
-  checkbox: {
-    height: "100%",
-    width: "100%",
-    tintColor: "#000"
+  newBtn: {
+    position: "absolute",
+    backgroundColor: "black",
+    bottom: 30,
+    right: 30,
+    padding: 20,
+    borderRadius: 50,
+    elevation: 10,
+    shadowColor: "grey"
   }
 });
+export default ChatListingScreen;
 
-const Button = params => {
-  const backgroundColor = params.backgroundColor || "#000";
-  const textColor = params.textColor || "#fff";
-  const btnStyle = {
-    backgroundColor: backgroundColor,
-    borderColor: params.borderColor || backgroundColor,
-    borderWidth: 1
-  };
-  const btnText = {
-    color: textColor
-  };
+const ChatListingItem = ({ message }) => {
   return (
-    <View style={[buttonStyles.btnContainer, params.style]}>
-      <View style={!params.hideShadow ? buttonStyles.shadowContainer : null}>
-        <Pressable
-          style={[buttonStyles.btn, btnStyle]}
-          onPress={params.onPress}>
-          <Text style={[buttonStyles.btnText, btnText]}>
-            {params.buttonText}
-          </Text>
-          <View style={styles.childrenContainer}>{params.children}</View>
-        </Pressable>
+    <View style={chatListingItemStyles.chatListingItem}>
+      <Image
+        source={message.profileImage}
+        style={chatListingItemStyles.profileImage}
+      />
+      {(message.isOnline && (
+        <Image
+          source={require("./assets/onlineIcon.png")}
+          style={chatListingItemStyles.activityDot}
+        />
+      )) ||
+        null}
+      <View style={chatListingItemStyles.chatListingItemInfo}>
+        <Text style={chatListingItemStyles.username}>{message.name}</Text>
+        <Text style={chatListingItemStyles.message}>{message.message}</Text>
+      </View>
+      <View style={chatListingItemStyles.chatListingItemTime}>
+        <Text style={chatListingItemStyles.time}>{message.lastTime}</Text>
+        {(message.unread > 0 && (
+          <View style={chatListingItemStyles.unread}>
+            <Text
+              style={{
+                color: "#fff"
+              }}>
+              {message.unread}
+            </Text>
+          </View>
+        )) ||
+          null}
       </View>
     </View>
   );
 };
 
-const buttonStyles = StyleSheet.create({
-  btnContainer: {
-    justifyContent: "center"
-  },
-  shadowContainer: {
-    shadowColor: "rgba(0, 0, 0, 0.5)",
-    shadowOffset: {
-      width: 0,
-      height: 5
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    elevation: 10,
-    backgroundColor: "#fff",
-    borderRadius: 10
-  },
-  btn: {
-    height: 50,
-    padding: 10,
-    paddingHorizontal: 25,
-    borderRadius: 10,
-    justifyContent: "center",
+const chatListingItemStyles = StyleSheet.create({
+  chatListingItem: {
+    flexDirection: "row",
     alignItems: "center",
-
-    flexDirection: "row"
+    borderColor: "#e6e6e6",
+    borderBottomWidth: 1,
+    marginHorizontal: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    height: 100
   },
-  btnText: {
-    color: "#fff",
+  profileImage: {
+    width: 70,
+    height: 70
+  },
+  activityDot: {
+    position: "absolute",
+    left: 65,
+    bottom: 20
+  },
+  chatListingItemInfo: {
+    flex: 1,
+    marginHorizontal: 15
+  },
+  username: {
     fontSize: 16,
+    fontWeight: "bold",
+    color: "#111112"
+  },
+  message: {
+    fontSize: 14,
+    color: "grey"
+  },
+  chatListingItemTime: {
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 60
+  },
+  time: {
+    fontSize: 14,
+    color: "grey",
     fontWeight: "bold"
   },
-  childrenContainer: {
+  unread: {
+    fontSize: 14,
+    backgroundColor: "black",
+    width: 30,
+    height: 30,
+    color: "#fff",
+    alignItems: "center",
     justifyContent: "center",
-    alignItems: "center"
+    borderRadius: 9
   }
 });
 
-const SocialButton = props => {
+const TabView = ({ tabTitles, selected }) => {
   return (
-    <Pressable
-      style={[socialButtonStyles.container, props.style]}
-      onPress={props.onPress}>
-      <Image source={props.icon} style={socialButtonStyles.icon} />
-      <Text style={socialButtonStyles.text}>Sign up via {props.text}</Text>
-    </Pressable>
+    <View style={tabViewStyles.paletteContainer}>
+      {tabTitles.map((title, index) => (
+        <View
+          style={
+            index === selected
+              ? tabViewStyles.selected
+              : tabViewStyles.unSelected
+          }
+          key={index}>
+          <Text>{title}</Text>
+        </View>
+      ))}
+    </View>
   );
 };
 
-const socialButtonStyles = StyleSheet.create({
-  container: {
+const tabViewStyles = StyleSheet.create({
+  paletteContainer: {
+    width: "70%",
+    height: 48,
+    backgroundColor: "#F1F1F1",
     flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 10,
+    padding: 6,
+    marginVertical: 10,
+    marginHorizontal: 20
+  },
+  selected: {
+    borderRadius: 10,
+    flex: 1,
+    backgroundColor: "#fff",
+    height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    height: 50,
-    width: "100%",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#C4C4C4",
-    backgroundColor: "#fff",
-    paddingHorizontal: 20,
-    marginVertical: 5
+    shadowColor: "gray",
+    elevation: 10
   },
-  icon: {
-    width: 20,
-    height: 20,
-    resizeMode: "contain",
-    marginRight: 10
-  },
-  text: {
-    fontSize: 16,
-    color: "#888888",
+  unSelected: {
     flex: 1,
-    textAlign: "center"
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F1F1F1",
+    borderRadius: 10
   }
 });
