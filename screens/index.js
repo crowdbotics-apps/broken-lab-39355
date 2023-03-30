@@ -1,319 +1,400 @@
-import React from "react";
-// @ts-ignore
-import ImgBackUrl from "./assets/back.png";
-// @ts-ignore
-import ImgChessUrl from "./assets/chess.png";
-// @ts-ignore
-import ImgDownUrl from "./assets/down.png";
-// @ts-ignore
-import ImgGrayStarUrl from "./assets/gray-star.png";
-// @ts-ignore
-import ImgMiniStarUrl from "./assets/mini-star.png";
-// @ts-ignore
-import ImgNotiUrl from "./assets/noti.png";
-// @ts-ignore
-import ImgStarUrl from "./assets/star.png";
-// @ts-ignore
-import ImgTimerUrl from "./assets/timer.png";
-// @ts-ignore
-import ImgUserUrl from "./assets/user.png";
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  Image,
+  Pressable,
+  ScrollView
+} from "react-native";
 
-import { Text, StyleSheet, View, Image, ScrollView, TextInput } from "react-native";
-
-const BusinessReviewsRatingsScreen = () => {
-  const ImgBack = Image.resolveAssetSource(ImgBackUrl).uri;
-  const ImgChess = Image.resolveAssetSource(ImgChessUrl).uri;
-  const ImgDown = Image.resolveAssetSource(ImgDownUrl).uri;
-  const ImgGrayStar = Image.resolveAssetSource(ImgGrayStarUrl).uri;
-  const ImgMiniStar = Image.resolveAssetSource(ImgMiniStarUrl).uri;
-  const ImgNoti = Image.resolveAssetSource(ImgNotiUrl).uri;
-  const ImgStar = Image.resolveAssetSource(ImgStarUrl).uri;
-  const ImgTimer = Image.resolveAssetSource(ImgTimerUrl).uri;
-  const ImgUser = Image.resolveAssetSource(ImgUserUrl).uri;
-
+const Signup2 = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isCheck, setIsCheck] = useState(false);
+  const [secureTextEntryPassword, setSecureTextEntryPassword] = useState(true);
+  const [secureTextEntryConfirmPassword, setSecureTextEntryConfirmPassword] =
+    useState(true);
   return (
-    <ScrollView style={styles.mainContainer}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Image source={{ uri: ImgBack }} style={styles.back} />
-          <Text style={styles.heading}>Reviews/Ratings</Text>
-          <Text />
+    <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Text style={styles.heading}>Welcome</Text>
+        <Text style={styles.subHeading}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non at sed.
+        </Text>
+        <Input
+          text="Email address"
+          placeholder="Enter your email address"
+          value={email}
+          onChange={setEmail}
+          containerStyle={styles.inputContainer}
+        />
+        <Input
+          text="Password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={setPassword}
+          containerStyle={styles.inputContainer}
+          secureTextEntry={secureTextEntryPassword}
+          icon={require("./assets/eyeIcon.png")}
+          iconOnPress={() =>
+            setSecureTextEntryPassword(!secureTextEntryPassword)
+          }
+        />
+        <Input
+          text="Confirm password"
+          placeholder="Enter your password again"
+          value={confirmPassword}
+          onChange={setConfirmPassword}
+          containerStyle={styles.inputContainer}
+          secureTextEntry={secureTextEntryConfirmPassword}
+          icon={require("./assets/eyeIcon.png")}
+          iconOnPress={() =>
+            setSecureTextEntryConfirmPassword(!secureTextEntryConfirmPassword)
+          }
+        />
+        <View style={styles.flexRow}>
+          <Checkbox
+            value={isCheck}
+            setValue={setIsCheck}
+            style={styles.checkbox}
+          />
+          <Text style={styles.description}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non at sed.
+          </Text>
         </View>
-        <Text style={styles.subHeading}>Average guest review</Text>
-        <View style={styles.starsReviewSection}>
-          <View style={styles.subSection}>
-            <Text style={styles.sectionText}>Stars</Text>
-            <View style={styles.starContainer}>
-              <Image source={{ uri: ImgMiniStar }} style={styles.star} />
-              <Image source={{ uri: ImgMiniStar }} style={styles.star} />
-              <Image source={{ uri: ImgMiniStar }} style={styles.star} />
-              <Image source={{ uri: ImgMiniStar }} style={styles.star} />
-              <Image source={{ uri: ImgMiniStar }} style={styles.lastStar} />
-            </View>
-          </View>
-          <Text style={styles.rating}>4.0</Text>
+        <View style={styles.flexRow}>
+          <Button buttonText="Sign Up" style={styles.button} />
+          <Pressable style={styles.fingerprintButton}>
+            <Image
+              source={require("./assets/fingerprintIcon.png")}
+              style={styles.fingerprintIcon}
+            />
+          </Pressable>
         </View>
-        <View style={styles.starsReviewSection1}>
-          <View style={styles.subSection}>
-            <Text style={styles.reviewText}>Reviews</Text>
-            <View style={styles.aveContainer}>
-              <Text>4.4</Text>
-              <Text style={styles.aveLabel}>average</Text>
-            </View>
-          </View>
-          <Image source={{ uri: ImgDown }} style={styles.downImg} />
+        <Text style={styles.separatorText}>Or Sign Up with</Text>
+        <SocialButton text="Apple" icon={require("./assets/appleIcon.png")} />
+        <SocialButton text="Google" icon={require("./assets/googleIcon.png")} />
+        <SocialButton
+          text="Facebook"
+          icon={require("./assets/facebookIcon.png")}
+        />
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>I have an account. </Text>
+          <Pressable>
+            <Text style={[styles.footerText, styles.bold]}>Login</Text>
+          </Pressable>
         </View>
-
-        <View style={styles.reviewsStarWrapper}>
-          <Text style={styles.starReview1}>1 Star reviews</Text>
-          <View style={styles.reviewsStarContainer}>
-            <View style={styles.starsContainer}>
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-            </View>
-            <Text style={styles.reviewStarText}>Poor</Text>
-          </View>
-          <Text style={styles.starReview1}>2 Star reviews</Text>
-          <View style={styles.reviewsStarContainer}>
-            <View style={styles.starsContainer}>
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-            </View>
-            <Text style={styles.reviewStarText}>Bad</Text>
-          </View>
-          <Text style={styles.starReview1}>3 Star reviews</Text>
-          <View style={styles.reviewsStarContainer}>
-            <View style={styles.starsContainer}>
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-            </View>
-            <Text style={styles.reviewStarText}>Good</Text>
-          </View>
-          <Text style={styles.starReview1}>4 Star reviews</Text>
-          <View style={styles.reviewsStarContainer}>
-            <View style={styles.starsContainer}>
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-            </View>
-            <Text style={styles.reviewStarText}>Very good</Text>
-          </View>
-          <Text style={styles.starReview1}>5 Star reviews</Text>
-          <View style={styles.reviewsStarContainer}>
-            <View style={styles.starsContainer}>
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-              <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-            </View>
-            <Text style={styles.reviewStarText}>Excellent</Text>
-          </View>
-        </View>
-        <Text style={styles.text}>Username</Text>
-        <View style={[styles.textInput, { marginBottom: 10 }]}>
-          <Input placeholder='Enter' />
-        </View>
-        <Text style={styles.mr10}>User review</Text>
-        <View style={[styles.textInput, { height: 150 }]}>
-          <Input placeholder="Enter" multiline={true} />
-        </View>
-        <Text style={styles.starReview1}>User star review</Text>
-        <View style={styles.reviewsStarContainer}>
-          <View style={styles.starsContainer}>
-            <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-            <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-            <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-            <Image source={{ uri: ImgStar }} style={styles.reviewStar} />
-            <Image source={{ uri: ImgGrayStar }} style={styles.reviewStar} />
-          </View>
-          <Text style={styles.reviewStarText}>Very good</Text>
-        </View>
-
-      </View>
-      <View style={styles.bottom}>
-        <Image source={{ uri: ImgChess }} style={styles.bottomImg} />
-        <Image source={{ uri: ImgTimer }} style={styles.bottomImg} />
-        <Image source={{ uri: ImgNoti }} style={styles.bottomImg} />
-        <Image source={{ uri: ImgUser }} style={styles.bottomImg} />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
-
 const styles = StyleSheet.create({
-  mainContainer: { backgroundColor: "#FFF" },
   container: {
     flex: 1,
-    marginHorizontal: 10
+    backgroundColor: "#fff",
+    paddingHorizontal: 20
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginHorizontal: 30,
-    marginTop: 15,
-    marginBottom: 40
+  heading: {
+    fontSize: 26,
+    fontWeight: "bold",
+    textAlign: "center",
+    alignSelf: "center",
+    color: "#222222",
+    marginVertical: 10
   },
-  back: { width: 11.25, height: 20, resizeMode: "contain", marginLeft: -20 },
-  heading: { fontSize: 16, color: "#000" },
   subHeading: {
     fontSize: 14,
-    fontWeight: "500",
-    marginHorizontal: 10,
-    marginTop: 10,
-    marginBottom: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E5E5",
-    paddingBottom: 10
-  },
-  starsReviewSection: {
-    marginHorizontal: 3,
-    paddingHorizontal: 7,
-    borderRadius: 10,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E5E5",
-    paddingBottom: 15,
+    color: "#888888",
+    textAlign: "center",
+    alignSelf: "center",
+    width: "80%",
+    lineHeight: 20,
     marginBottom: 20
   },
-
-  starsReviewSection1: {
-    marginHorizontal: 10,
-    borderRadius: 10,
-    display: "flex",
+  flexRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    paddingBottom: 15,
-    marginBottom: 20,
-    paddingHorizontal: 3
+    marginVertical: 10
   },
-  subSection: {
-    display: "flex",
-    flexDirection: "column"
+  checkbox: {
+    marginLeft: 10
   },
-  sectionText: {
-    fontSize: 22,
-    fontWeight: "400",
-    marginBottom: 5
+  description: {
+    fontSize: 14,
+    color: "#888888",
+    lineHeight: 20,
+    marginLeft: 10,
+    flex: 1,
+    flexWrap: "wrap"
   },
-  starContainer: {
-    flexDirection: "row",
+  button: {
+    flex: 1,
+    marginRight: 10
+  },
+  fingerprintButton: {
+    width: 50,
+    height: 50,
+    padding: 0,
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "space-between",
-    width: "55%"
+    backgroundColor: "#F2F2F2",
+    borderRadius: 10
   },
-  rating: {
-    marginRight: 10,
-    fontSize: 26,
-    fontWeight: "600"
+  fingerprintIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: "contain"
   },
-  star: { height: 16.7, width: 17.49 },
-  lastStar: { height: 16.7, width: 17.49, opacity: 0.4 },
-  aveContainer: {
+  separatorText: {
+    fontSize: 12,
+    color: "#888888",
+    textAlign: "center",
+    alignSelf: "center",
+    marginBottom: 20
+  },
+  footer: {
     flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "space-between",
-    width: "38%"
+    marginVertical: 20
   },
-  reviewText: {
-    fontSize: 18,
-    fontWeight: "400",
-    marginBottom: 5
+  footerText: {
+    fontSize: 16,
+    color: "#888888"
   },
-  aveLabel: { fontSize: 14, color: "#7C7C7C" },
-  downImg: { height: 15, width: 12, marginRight: 10, resizeMode: "contain" },
-  reviewsStarWrapper: {
-    paddingTop: 10,
-    paddingBottom: 20,
-    borderRadius: 10,
-    shadowColor: "#7C7C7C",
-    shadowOffset: { width: 0, height: -5 },
-    shadowOpacity: 0.4,
-    shadowRadius: 6,
-    elevation: 15,
-    backgroundColor: "#fff",
-    marginBottom: 30,
-    marginTop: -15
-  },
-  reviewsStarContainer: {
-    marginHorizontal: 8,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderColor: "#C4C4C4",
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 15
-  },
-  starsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "50%"
-  },
-  reviewStar: { width: 26.7, height: 25.48, resizeMode: "contain" },
-  reviewStarText: { fontSize: 11, fontWeight: "300" },
-  starReview1: { fontSize: 14, fontWeight: "400", marginLeft: 25, marginVertical: 5 },
-  mr10: {
-    marginLeft: 25,
-    marginBottom: 10
-  },
-  textInput: { borderWidth: 1, borderRadius: 10, borderColor: "#C4C4C4", marginBottom: 10, marginHorizontal: 7, paddingHorizontal: 4 },
-  text: { paddingLeft: 25, paddingBottom: 10 },
-  bottom: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: 20, paddingHorizontal: 45, borderTopWidth: 0.5, borderTopColor: "#000", backgroundColor: "#fff", marginTop: 40 },
-  bottomImg: { width: 24, height: 24, resizeMode: "contain" }
+  bold: {
+    fontWeight: "bold"
+  }
 });
 
-const Input = (props) => {
+export default Signup2;
+
+const Input = props => {
   return (
-    <View style={InputStyles.container}>
+    <View style={[inputStyles.inputContainer, props.containerStyle]}>
+      {props.text
+        ? (
+        <Text style={inputStyles.inputText}>{props.text}</Text>
+          )
+        : null}
+
       <TextInput
-        style={InputStyles.input}
-        placeholder={props.placeholder}
+        style={[
+          inputStyles.input,
+          props.style,
+          props.textArea ? inputStyles.textArea : null
+        ]}
+        placeholder={props.placeholder ? props.placeholder : "Enter"}
         value={props.value}
-        onChangeText={(num) => props.setValue(num)}
-        placeholderTextColor='#000'
-        multiline={props.multiline}
-        numberOfLines={props.multiline ? 10 : null}
+        onChangeText={() => props.onChange()}
+        placeholderTextColor={
+          props.placeholderTextColor ? props.placeholderTextColor : "#9B9B9B"
+        }
         editable={props.editable !== false}
+        autoCapitalize="none"
+        autoCorrect={false}
+        multiline={!!props.textArea}
+        backgroundColor={props.backgroundColor}
+        secureTextEntry={props.secureTextEntry}
       />
+      {props.errorText
+        ? (
+        <Text style={inputStyles.error}>{props.errorText}</Text>
+          )
+        : null}
+      {props.icon
+        ? (
+        <Pressable
+          onPress={() => props.iconOnPress()}
+          style={inputStyles.iconWithText}>
+          <Image source={props.icon} style={inputStyles.icon} />
+        </Pressable>
+          )
+        : null}
+      <View style={styles.children}>{props.children}</View>
     </View>
   );
 };
 
-const InputStyles = StyleSheet.create({
-  container: {
-    width: "100%",
-    borderRadius: 10
+const inputStyles = StyleSheet.create({
+  inputContainer: {
+    flexDirection: "column",
+    justifyContent: "center"
+  },
+  inputText: {
+    fontSize: 14,
+    marginLeft: 20,
+    color: "#111112"
   },
   input: {
-    backgroundColor: "#fff",
-    height: 49,
-    color: "#000",
-    fontSize: 14
+    borderWidth: 1,
+    borderColor: "#e6e6e6",
+    borderRadius: 10,
+    padding: 10,
+    paddingLeft: 20,
+    marginVertical: 10,
+    width: "100%",
+    height: 50,
+    color: "#000"
   },
-  error: {
-    fontSize: 13,
-    color: "#FA060D",
-    paddingTop: 8
+  iconWithText: {
+    position: "absolute",
+    right: 30,
+    bottom: 25,
+    width: 20,
+    height: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1
+  },
+  icon: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain"
+  },
+  textArea: {
+    height: 150
+  },
+  children: {}
+});
+
+const Checkbox = props => {
+  return (
+    <Pressable
+      onPress={() => {
+        props.setValue(!props.value);
+      }}
+      style={[checkboxStyles.container, props.style]}>
+      <Image
+        source={
+          props.value
+            ? require("./assets/checkboxIconActive.png")
+            : require("./assets/checkboxIcon.png")
+        }
+        style={[
+          checkboxStyles.checkbox,
+          props.color && { tintColor: props.color },
+          props.activeColor && props.value && { tintColor: props.activeColor }
+        ]}
+      />
+    </Pressable>
+  );
+};
+
+const checkboxStyles = StyleSheet.create({
+  container: {
+    height: 20,
+    width: 20
+  },
+  checkbox: {
+    height: "100%",
+    width: "100%",
+    tintColor: "#000"
   }
 });
 
-export default BusinessReviewsRatingsScreen;
+const Button = params => {
+  const backgroundColor = params.backgroundColor || "#000";
+  const textColor = params.textColor || "#fff";
+  const btnStyle = {
+    backgroundColor: backgroundColor,
+    borderColor: params.borderColor || backgroundColor,
+    borderWidth: 1
+  };
+  const btnText = {
+    color: textColor
+  };
+  return (
+    <View style={[buttonStyles.btnContainer, params.style]}>
+      <View style={!params.hideShadow ? buttonStyles.shadowContainer : null}>
+        <Pressable
+          style={[buttonStyles.btn, btnStyle]}
+          onPress={params.onPress}>
+          <Text style={[buttonStyles.btnText, btnText]}>
+            {params.buttonText}
+          </Text>
+          <View style={styles.childrenContainer}>{params.children}</View>
+        </Pressable>
+      </View>
+    </View>
+  );
+};
+
+const buttonStyles = StyleSheet.create({
+  btnContainer: {
+    justifyContent: "center"
+  },
+  shadowContainer: {
+    shadowColor: "rgba(0, 0, 0, 0.5)",
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    elevation: 10,
+    backgroundColor: "#fff",
+    borderRadius: 10
+  },
+  btn: {
+    height: 50,
+    padding: 10,
+    paddingHorizontal: 25,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+
+    flexDirection: "row"
+  },
+  btnText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold"
+  },
+  childrenContainer: {
+    justifyContent: "center",
+    alignItems: "center"
+  }
+});
+
+const SocialButton = props => {
+  return (
+    <Pressable
+      style={[socialButtonStyles.container, props.style]}
+      onPress={props.onPress}>
+      <Image source={props.icon} style={socialButtonStyles.icon} />
+      <Text style={socialButtonStyles.text}>Sign up via {props.text}</Text>
+    </Pressable>
+  );
+};
+
+const socialButtonStyles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    width: "100%",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#C4C4C4",
+    backgroundColor: "#fff",
+    paddingHorizontal: 20,
+    marginVertical: 5
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    resizeMode: "contain",
+    marginRight: 10
+  },
+  text: {
+    fontSize: 16,
+    color: "#888888",
+    flex: 1,
+    textAlign: "center"
+  }
+});
