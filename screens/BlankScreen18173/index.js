@@ -1,9 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
+import { Pressable } from "react-native";
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
 const BlankScreen18173 = () => {
-  return <View style={_styles.BlankScreen18173}>
-      </View>;
+  const navigation = useNavigation();
+  return <Pressable onPress={() => {
+    navigation.navigate("BlankScreen18175");
+  }}><View style={_styles.BlankScreen18173}>
+      </View></Pressable>;
 };
 
 export default BlankScreen18173;
