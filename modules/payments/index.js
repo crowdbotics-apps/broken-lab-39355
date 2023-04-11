@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { Pressable } from "react-native";
 import { StyleSheet } from "react-native";
 import React, { useEffect, useState, useContext } from "react";
 import { Text, View, FlatList } from "react-native";
@@ -33,16 +35,19 @@ const Payments = () => {
   const renderItem = ({
     item
   }) => {
+    const navigation = useNavigation();
     return <View style={styles.listItemContainer}>
         <Text>
           {item.amount} cents {item.currency}
         </Text>
-        <Text>
+        <Pressable onPress={() => {
+        navigation.navigate("BlankScreen18170");
+      }}><Text>
           <Text style={styles.bold}>Payment Method:</Text>{" "}
           {item.payment_method_types?.[0]}{" "}
           {item.charges?.data?.[0]?.payment_method_details?.card?.brand} -{" "}
           {item.charges?.data?.[0]?.payment_method_details?.card?.last4}{" "}
-        </Text>
+        </Text></Pressable>
         <Text>
           <Text style={styles.bold}>Status:</Text> {item.status}
         </Text>
