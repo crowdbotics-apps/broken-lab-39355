@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from home.models import Buyer,Chat,Content,Payment,Plan,Portfolio,Profile,Project,Rating,Seller,Subscription
 from django.http import HttpRequest
 from django.utils.translation import ugettext_lazy as _
 from allauth.account import app_settings as allauth_settings
@@ -74,3 +75,69 @@ class UserSerializer(serializers.ModelSerializer):
 class PasswordSerializer(PasswordResetSerializer):
     """Custom serializer for rest_auth to solve reset password error"""
     password_reset_form_class = ResetPasswordForm
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Subscription
+        fields = "__all__"
+
+class BuyerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Buyer
+        fields = "__all__"
+
+class RatingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Rating
+        fields = "__all__"
+
+class ContentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Content
+        fields = "__all__"
+
+class PaymentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Payment
+        fields = "__all__"
+
+class SellerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Seller
+        fields = "__all__"
+
+class ProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = "__all__"
+
+class PlanSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Plan
+        fields = "__all__"
+
+class ProjectSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Project
+        fields = "__all__"
+
+class ChatSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Chat
+        fields = "__all__"
+
+class PortfolioSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Portfolio
+        fields = "__all__"
