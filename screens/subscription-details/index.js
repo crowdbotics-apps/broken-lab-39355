@@ -1,15 +1,21 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, View, StyleSheet, Image, ScrollView, Pressable } from "react-native";
 
 const SubscriptionDetails = () => {
+  const navigation = useNavigation();
   return <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Image source={require("./assets/back.png")} style={styles.back} />
-        <Text style={styles.heading}>Subscription</Text>
-        <Text />
+        <Pressable onPress={() => {
+        navigation.navigate("BlankScreen18168");
+      }}><Text style={styles.heading}>Subscription</Text></Pressable>
+        <Pressable onPress={() => {
+        navigation.navigate("Payments");
+      }}><Text /></Pressable>
       </View>
       <View style={styles.reviewContainer}>
-        <Text style={styles.review}>Current Subscription</Text>
+        <Pressable><Text style={styles.review}>Current Subscription</Text></Pressable>
         <Text style={styles.edit}>Free</Text>
       </View>
 
@@ -116,12 +122,12 @@ const Button = params => {
   const btnText = {
     color: params.outline ? "#000" : "#fff"
   };
-  return <View style={buttonStyles.btnContainer}>
+  return <Pressable><View style={buttonStyles.btnContainer}>
       <Pressable style={[buttonStyles.btn, btnStyle]} onPress={params.onPress}>
         <Text style={[buttonStyles.btnText, btnText]}>{params.buttonText}</Text>
         <View style={styles.childrenContainer}>{params.children}</View>
       </Pressable>
-    </View>;
+    </View></Pressable>;
 };
 
 const buttonStyles = StyleSheet.create({

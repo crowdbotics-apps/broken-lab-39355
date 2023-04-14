@@ -8,7 +8,7 @@ const BlankScreen18167 = () => {
   const navigation = useNavigation();
   return <View style={_styles.BlankScreen18167}>
       <Pressable onPress={() => {
-      navigation.navigate("BlankScreen18169");
+      navigation.navigate("subscriptionDetails");
     }}><Text style={_styles.upSoxVVp}>Lorem ipsum…</Text></Pressable></View>;
 };
 
