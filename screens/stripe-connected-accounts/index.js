@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-  Image
-} from "react-native";
+import { Text, View, StyleSheet, Pressable, ScrollView, Image } from "react-native";
 
 const StripeConnectedAccounts = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -14,49 +7,44 @@ const StripeConnectedAccounts = () => {
   const [accounts, setAccounts] = useState([]);
   const [expanded, setExpanded] = useState([]);
   useEffect(() => {
-    setAccounts([
-      {
-        email: "Username@email.com",
-        status: "Completed",
-        balance: 0,
-        volume: 0,
-        type: "Express",
-        date: "07 June"
-      },
-      {
-        email: "Username@email.com",
-        status: "Completed",
-        balance: 0,
-        volume: 0,
-        type: "Express",
-        date: "07 June"
-      },
-      {
-        email: "Username@email.com",
-        status: "Completed",
-        balance: 0,
-        volume: 0,
-        type: "Express",
-        date: "07 June"
-      },
-      {
-        email: "Username@email.com",
-        status: "Completed",
-        balance: 0,
-        volume: 0,
-        type: "Express",
-        date: "07 June"
-      },
-      {
-        email: "Username@email.com",
-        status: "Completed",
-        balance: 0,
-        volume: 0,
-        type: "Express",
-        date: "07 June"
-      }
-    ]);
+    setAccounts([{
+      email: "Username@email.com",
+      status: "Completed",
+      balance: 0,
+      volume: 0,
+      type: "Express",
+      date: "07 June"
+    }, {
+      email: "Username@email.com",
+      status: "Completed",
+      balance: 0,
+      volume: 0,
+      type: "Express",
+      date: "07 June"
+    }, {
+      email: "Username@email.com",
+      status: "Completed",
+      balance: 0,
+      volume: 0,
+      type: "Express",
+      date: "07 June"
+    }, {
+      email: "Username@email.com",
+      status: "Completed",
+      balance: 0,
+      volume: 0,
+      type: "Express",
+      date: "07 June"
+    }, {
+      email: "Username@email.com",
+      status: "Completed",
+      balance: 0,
+      volume: 0,
+      type: "Express",
+      date: "07 June"
+    }]);
   }, []);
+
   const handleExpand = item => {
     if (expanded.includes(item)) {
       setExpanded(expanded.filter(i => i !== item));
@@ -64,113 +52,62 @@ const StripeConnectedAccounts = () => {
       setExpanded([...expanded, item]);
     }
   };
-  return (
-    <View style={styles.container}>
+
+  return <View style={styles.container}>
       <ScrollView>
         <View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <TabView
-              tabTitles={[
-                "All Accounts",
-                "Restricted",
-                "Restricted Soon",
-                "Personal"
-              ]}
-              selected={selectedTab}
-              onPress={setSelectedTab}
-              style={styles.tabViewScroll}
-            />
+            <TabView tabTitles={["All Accounts", "Restricted", "Restricted Soon", "Personal"]} selected={selectedTab} onPress={setSelectedTab} style={styles.tabViewScroll} />
           </ScrollView>
         </View>
         <View style={styles.flexRow}>
           <Text style={styles.heading}>Accounts</Text>
-          <Image
-            source={require("./assets/settingsIcon.png")}
-            style={styles.icon}
-          />
+          <Image source={require("./assets/settingsIcon.png")} style={styles.icon} />
         </View>
-        <TabView
-          tabTitles={["Filter", "Create", "Export"]}
-          selected={selectedTab1}
-          onPress={setSelectedTab1}
-          style={styles.tabView}
-          icons={[
-            require("./assets/filterIcon.png"),
-            require("./assets/addIcon.png"),
-            require("./assets/uploadIcon.png")
-          ]}
-        />
-        {accounts.map((account, index) => (
-          <View key={index} style={styles.accountContainer}>
-            <Pressable
-              style={styles.accountHeader}
-              onPress={() => handleExpand(account)}>
+        <TabView tabTitles={["Filter", "Create", "Export"]} selected={selectedTab1} onPress={setSelectedTab1} style={styles.tabView} icons={[require("./assets/filterIcon.png"), require("./assets/addIcon.png"), require("./assets/uploadIcon.png")]} />
+        {accounts.map((account, index) => <View key={index} style={styles.accountContainer}>
+            <Pressable style={styles.accountHeader} onPress={() => handleExpand(account)}>
               <Text>{account.email}</Text>
-              <Image
-                style={styles.icon}
-                source={
-                  expanded.includes(account)
-                    ? require("./assets/dropdownIconExpanded.png")
-                    : require("./assets/dropdownIconCollapsed.png")
-                }
-              />
+              <Image style={styles.icon} source={expanded.includes(account) ? require("./assets/dropdownIconExpanded.png") : require("./assets/dropdownIconCollapsed.png")} />
             </Pressable>
-            {expanded.includes(account) && (
-              <View style={styles.accountBody}>
+            {expanded.includes(account) && <View style={styles.accountBody}>
                 <View style={styles.flexRow}>
-                  <Image
-                    style={styles.icon}
-                    source={require("./assets/settingsIcon.png")}
-                  />
+                  <Image style={styles.icon} source={require("./assets/settingsIcon.png")} />
                   <Text style={styles.mainText}>Status</Text>
                   <View style={styles.pill}>
                     <Text style={styles.pillText}>{account.status}</Text>
                   </View>
                 </View>
                 <View style={styles.flexRow}>
-                  <Image
-                    style={styles.icon}
-                    source={require("./assets/downArrowIcon.png")}
-                  />
+                  <Image style={styles.icon} source={require("./assets/downArrowIcon.png")} />
                   <Text style={styles.mainText}>Balance</Text>
                   <Text style={styles.subText}>
                     {format(account.balance, "USD")}
                   </Text>
                 </View>
                 <View style={styles.flexRow}>
-                  <Image
-                    style={styles.icon}
-                    source={require("./assets/downArrowIcon.png")}
-                  />
+                  <Image style={styles.icon} source={require("./assets/downArrowIcon.png")} />
                   <Text style={styles.mainText}>Volume</Text>
                   <Text style={styles.subText}>
                     {format(account.volume, "USD")}
                   </Text>
                 </View>
                 <View style={styles.flexRow}>
-                  <Image
-                    style={styles.icon}
-                    source={require("./assets/settingsIcon.png")}
-                  />
+                  <Image style={styles.icon} source={require("./assets/settingsIcon.png")} />
                   <Text style={styles.mainText}>Type</Text>
                   <Text style={styles.subText}>{account.type}</Text>
                 </View>
                 <View style={styles.flexRow}>
-                  <Image
-                    style={styles.icon}
-                    source={require("./assets/downArrowIcon.png")}
-                  />
+                  <Image style={styles.icon} source={require("./assets/downArrowIcon.png")} />
                   <Text style={styles.mainText}>Connected</Text>
                   <Text style={styles.subText}>{account.date}</Text>
                 </View>
-              </View>
-            )}
-          </View>
-        ))}
+              </View>}
+          </View>)}
       </ScrollView>
-    </View>
-  );
+    </View>;
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -230,7 +167,6 @@ const styles = StyleSheet.create({
     color: "#fff"
   }
 });
-
 export default StripeConnectedAccounts;
 
 const TabView = ({
@@ -249,40 +185,12 @@ const TabView = ({
     backgroundColor: backgroundColor || "#F1F1F1"
   };
   const propStyle = style || {};
-  return (
-    <View
-      style={[tabViewStyles.paletteContainer, backgroundColorStyle, propStyle]}>
-      {tabTitles.map((title, index) => (
-        <Pressable
-          onPress={() => (onPress ? onPress(index) : null)}
-          style={
-            index === selected
-              ? [tabViewStyles.selected, tabColorStyle, tabViewStyles.tabItem]
-              : [
-                  tabViewStyles.unSelected,
-                  backgroundColorStyle,
-                  tabViewStyles.tabItem
-                ]
-          }
-          key={index}>
-          {icons
-            ? (
-            <Image
-              source={icons[index]}
-              style={[
-                tabViewStyles.icon,
-                index === selected
-                  ? tabViewStyles.selectedIcon
-                  : tabViewStyles.unSelectedIcon
-              ]}
-            />
-              )
-            : null}
+  return <View style={[tabViewStyles.paletteContainer, backgroundColorStyle, propStyle]}>
+      {tabTitles.map((title, index) => <Pressable onPress={() => onPress ? onPress(index) : null} style={index === selected ? [tabViewStyles.selected, tabColorStyle, tabViewStyles.tabItem] : [tabViewStyles.unSelected, backgroundColorStyle, tabViewStyles.tabItem]} key={index}>
+          {icons ? <Image source={icons[index]} style={[tabViewStyles.icon, index === selected ? tabViewStyles.selectedIcon : tabViewStyles.unSelectedIcon]} /> : null}
           <Text>{title}</Text>
-        </Pressable>
-      ))}
-    </View>
-  );
+        </Pressable>)}
+    </View>;
 };
 
 const tabViewStyles = StyleSheet.create({
@@ -327,25 +235,25 @@ const tabViewStyles = StyleSheet.create({
 });
 
 const format = (num, currency) => {
-  let str =
-    num &&
-    num
-      .toFixed(2)
-      .toString()
-      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  let str = num && num.toFixed(2).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
   switch (currency) {
     case "BTC":
       str += " BTC";
       break;
+
     case "ETH":
       str += " ETH";
       break;
+
     case "USD":
       str = "$" + str;
       break;
+
     default:
       str = "$" + str;
       break;
   }
+
   return str;
 };
