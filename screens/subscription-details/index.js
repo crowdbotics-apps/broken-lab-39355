@@ -8,7 +8,7 @@ const SubscriptionDetails = () => {
       <View style={styles.header}>
         <Image source={require("./assets/back.png")} style={styles.back} />
         <Pressable onPress={() => {
-        navigation.navigate("BlankScreen18168");
+        navigation.navigate("stripeConnect2");
       }}><Text style={styles.heading}>Subscription</Text></Pressable>
         <Pressable onPress={() => {
         navigation.navigate("Payments");
