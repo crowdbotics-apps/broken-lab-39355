@@ -21,7 +21,9 @@ const Login2 = () => {
           <Input placeholder="Email" />
         </View>
         <View style={styles.mb20}>
-          <Text style={styles.mr10}>Password</Text>
+          <Pressable onPress={() => {
+          navigation.navigate("forgotPassword");
+        }}><Text style={styles.mr10}>Password</Text></Pressable>
           <Input placeholder="Password" />
         </View>
         <View style={styles.forgotPassword}>
