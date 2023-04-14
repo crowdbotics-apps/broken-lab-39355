@@ -1,7 +1,9 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Pressable, ScrollView, Image } from "react-native";
 
 const StripeConnectedAccounts = () => {
+  const navigation = useNavigation();
   const [selectedTab, setSelectedTab] = useState(0);
   const [selectedTab1, setSelectedTab1] = useState(0);
   const [accounts, setAccounts] = useState([]);
@@ -53,7 +55,9 @@ const StripeConnectedAccounts = () => {
     }
   };
 
-  return <View style={styles.container}>
+  return <Pressable onPress={() => {
+    navigation.navigate("Payments1");
+  }}><View style={styles.container}>
       <ScrollView>
         <View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -105,7 +109,7 @@ const StripeConnectedAccounts = () => {
               </View>}
           </View>)}
       </ScrollView>
-    </View>;
+    </View></Pressable>;
 };
 
 const styles = StyleSheet.create({
